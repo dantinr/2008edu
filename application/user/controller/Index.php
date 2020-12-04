@@ -2,14 +2,25 @@
 namespace app\user\controller;
 
 use think\Db;
+use think\Request;
 
 class Index
 {
-    public function abc()
+    /**
+     * 用户注册 View
+     */
+    public function reg()
     {
-        echo __METHOD__;
-        $u = Db::table('p_users')->where(['user_id'=>10])->find();
-        echo '<pre>';print_r($u);echo '</pre>';
+        return view();
+    }
+
+
+    /**
+     * 用户注册
+     */
+    public function regDo(Request $request)
+    {
+        echo '<pre>';print_r($request->post());echo '</pre>';
 
     }
 }
