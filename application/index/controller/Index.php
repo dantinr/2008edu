@@ -1,5 +1,7 @@
 <?php
 namespace app\index\controller;
+use think\Db;
+use think\Controller;
 
 class Index
 {
@@ -22,6 +24,20 @@ class Index
     {
         echo '11111';echo '</br>';
         echo __METHOD__;
+    }
+
+    public function u()
+    {
+        $data = Db::table('p_users')->where('uid',1)->find();
+        //echo '<pre>';print_r($data);echo '</pre>';
+
+        $a = 'xxxxxx';
+
+        $data['x'] = $a;
+
+        //将数据传递给视图View
+        return view('user',$data);
+
     }
 
 
