@@ -12,4 +12,17 @@ class Index
     {
         return 'hello,' . $name;
     }
+
+    public function aaa()
+    {
+        echo __METHOD__;
+    }
+
+    public function test()
+    {
+        echo '11111';echo '</br>';
+        echo __METHOD__;
+    }
+
+
 }
