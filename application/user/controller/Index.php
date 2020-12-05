@@ -1,11 +1,12 @@
 <?php
 namespace app\user\controller;
 
+use think\Controller;
 use think\Db;
 use think\Request;
 use think\Session;
 
-class Index
+class Index extends Controller
 {
 
     public function test()
@@ -88,7 +89,15 @@ class Index
      */
     public function login()
     {
-        return view();
+        //判断是否已登录
+        $uid = session('uid');
+        if($uid)        // 已登录
+        {
+            $this->success('您已登录，正在跳转至个人中心','/index.php?s=user/index/center');
+        }else{  // 未登录
+            return view();
+        }
+
     }
 
 
@@ -99,6 +108,7 @@ class Index
     {
         $name = $_POST['user_name'];    // 可能是 用户名或Email或手机号
         $pass = $_POST['pass'];
+        $now = time();
 
         //查询数据库中记录
         $u = Db::table('p_users')->where(['user_name'=>$name])
@@ -112,24 +122,20 @@ class Index
             if( password_verify($pass,$u['pass']) ){
 
                 //更新最后登录时间
-                Db::table('p_users')->where(['uid'=>$u['uid']])->update(['last_login'=>time()]);
+                Db::table('p_users')->where(['uid'=>$u['uid']])->update(['last_login'=>$now]);
                 //保存 登录信息
-                $_SESSION['user_name'] = $u['user_name'];
-                $_SESSION['uid'] = $u['uid'];
-
                 session('name',$u['user_name']);
                 session('uid',$u['uid']);
+                session('login_time',date('Y-m-d H:i:s',$now));
 
-
-                echo "登录成功";
+                $this->success('登录成功', '/index.php?s=user/index/center');
 
             }else{
-                echo '<pre>';print_r($_SESSION);echo '</pre>';
                 echo "密码错误";
             }
 
         }else{
-            echo "用户不存在";
+            $this->error('用户不存在');
         }
 
     }
@@ -141,11 +147,31 @@ class Index
     public function center()
     {
 
-        if(isset($_SESSION['uid']))
+        $name = session('name');        //取 session中的 name字段
+        if($name)
         {
-            echo "欢迎： ". $_SESSION['user_name'];
+
+            //在模板中显示用户信息
+            $user_info = [
+                'user_name' => $name,
+                'time'      => date('Y-m-d H:i:s'),
+                'login_time'    => session('login_time')
+            ];
+            return view('center',$user_info);
         }else{
             echo "请先登录";
         }
+    }
+
+    /**
+     * 退出登录 清空session中的登录信息
+     */
+    public function logout()
+    {
+        session('name',null);
+        session('uid',null);
+
+        return redirect('/index.php?s=user/index/login');
+
     }
 }
