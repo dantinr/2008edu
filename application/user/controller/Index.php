@@ -3,6 +3,7 @@ namespace app\user\controller;
 
 use think\Db;
 use think\Request;
+use think\Session;
 
 class Index
 {
@@ -109,8 +110,21 @@ class Index
         {
             //验证密码
             if( password_verify($pass,$u['pass']) ){
+
+                //更新最后登录时间
+                Db::table('p_users')->where(['uid'=>$u['uid']])->update(['last_login'=>time()]);
+                //保存 登录信息
+                $_SESSION['user_name'] = $u['user_name'];
+                $_SESSION['uid'] = $u['uid'];
+
+                session('name',$u['user_name']);
+                session('uid',$u['uid']);
+
+
                 echo "登录成功";
+
             }else{
+                echo '<pre>';print_r($_SESSION);echo '</pre>';
                 echo "密码错误";
             }
 
@@ -118,5 +132,20 @@ class Index
             echo "用户不存在";
         }
 
+    }
+
+
+    /**
+     * 个人中心
+     */
+    public function center()
+    {
+
+        if(isset($_SESSION['uid']))
+        {
+            echo "欢迎： ". $_SESSION['user_name'];
+        }else{
+            echo "请先登录";
+        }
     }
 }

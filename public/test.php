@@ -1,11 +1,9 @@
 <?php
+    // talk is cheap , show me the code
 
+    session_start();        // 开启 会话
 
-    password_verify();
+    $_SESSION['name'] = 'zhangsan';
+    $_SESSION['uid'] = 1234;
 
-    if(abc())        // true  >0  非空字符串  非空
-    {
-        echo "真";
-    }else{          // false  0  []  null  ""  "0"
-        echo "假";
-    }
+    echo '<pre>';print_r($_SESSION);echo '</pre>';
