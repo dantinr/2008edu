@@ -6,6 +6,12 @@ use think\Request;
 
 class Index
 {
+
+    public function test()
+    {
+        return redirect('/index.php?s=user/index/login');
+    }
+
     /**
      * 用户注册 View
      */
@@ -20,6 +26,7 @@ class Index
      */
     public function regDo(Request $request)
     {
+
         $user_name = $request->post('user_name');       // $_POST['user_name']
         $mobile = $request->post('mobile');
         $email = $request->post('email');
@@ -65,6 +72,9 @@ class Index
         $uid = Db::table('p_users')->insertGetId($user_info);
         if($uid>0){
             echo "注册成功： ". $uid;echo '</br>';
+            //注册成功后重定向至登录页面
+            redirect('/index.php?s=user/index/login');
+
         }else{
             echo "注册失败";
         }
@@ -81,13 +91,32 @@ class Index
     }
 
 
+    /**
+     * 登录逻辑
+     */
     public function loginDo()
     {
-        // 用户名  +  手机号  +  Email
+        $name = $_POST['user_name'];    // 可能是 用户名或Email或手机号
+        $pass = $_POST['pass'];
 
-        // 密码验证
-        password_verify();
+        //查询数据库中记录
+        $u = Db::table('p_users')->where(['user_name'=>$name])
+            ->whereOr(['email'=>$name])
+            ->whereOr(['mobile'=>$name])
+            ->find();
 
-        //将用户信息保存在 session中
+        if($u)      //用户存在
+        {
+            //验证密码
+            if( password_verify($pass,$u['pass']) ){
+                echo "登录成功";
+            }else{
+                echo "密码错误";
+            }
+
+        }else{
+            echo "用户不存在";
+        }
+
     }
 }
