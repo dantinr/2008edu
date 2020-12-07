@@ -5,12 +5,16 @@ use think\Controller;
 use think\Db;
 use think\Request;
 use think\Session;
+use app\user\model\User;
 
 class Index extends Controller
 {
 
     public function test()
     {
+        $u = User::where('uid','=',3)->find();
+        echo '<pre>';print_r($u);echo '</pre>';
+        echo __METHOD__;die;
         return redirect('/index.php?s=user/index/login');
     }
 
@@ -148,14 +152,30 @@ class Index extends Controller
     {
 
         $name = session('name');        //取 session中的 name字段
+        $uid = \session('uid');
         if($name)
         {
+
+            //判断用户是否已签到过
+            $today = strtotime( date('Y-m-d') ) ;     // 今天开始时的时间戳
+            $record = Db::table('p_qiandao')->where('uid','=',$uid)
+                ->where("add_time",'>=',$today)->find();
+
+            if($record){        //用户签到过
+                $qiandao = 1;
+                $qiandao_time = date('Y-m-d H:i:s' ,$record['add_time']);
+            }else{
+                $qiandao = 0;
+                $qiandao_time = 0;
+            }
 
             //在模板中显示用户信息
             $user_info = [
                 'user_name' => $name,
                 'time'      => date('Y-m-d H:i:s'),
-                'login_time'    => session('login_time')
+                'login_time'    => session('login_time'),
+                'qiandao'   => $qiandao,        //签到状态
+                'qiandao_time'   => $qiandao_time,        //签到时间
             ];
             return view('center',$user_info);
         }else{
@@ -172,6 +192,36 @@ class Index extends Controller
         session('uid',null);
 
         return redirect('/index.php?s=user/index/login');
+
+    }
+
+    /**
+     * 用户签到
+     */
+    public function qiandao()
+    {
+
+        // 1 获取用户uid
+        $uid = session('uid');
+
+        //判断用户是否已签到过
+        $today = strtotime( date('Y-m-d') ) ;     // 今天开始时的时间戳
+        $record = Db::table('p_qiandao')->where('uid','=',$uid)
+            ->where("add_time",'>=',$today)->all();
+        // select * from qiandao where uid=123 and add_time>=$today
+
+        if($record)     // 已经签到过了
+        {
+            $this->error("您已经签到过了");
+        }else{
+            // 2 签到信息入库 uid  签到时间
+            $id = Db::table('p_qiandao')->insertGetId(['uid'=>$uid,'add_time'=>time()]);
+            if($id)
+            {
+                $this->success("签到成功");
+            }
+        }
+
 
     }
 }
