@@ -156,6 +156,9 @@ class Index extends Controller
         if($name)
         {
 
+            //获取用户信息
+            $u = Db::table('p_users')->where("uid",'=',$uid)->find();
+
             //判断用户是否已签到过
             $today = strtotime( date('Y-m-d') ) ;     // 今天开始时的时间戳
             $record = Db::table('p_qiandao')->where('uid','=',$uid)
@@ -176,6 +179,7 @@ class Index extends Controller
                 'login_time'    => session('login_time'),
                 'qiandao'   => $qiandao,        //签到状态
                 'qiandao_time'   => $qiandao_time,        //签到时间
+                'score'     => $u['score'],
             ];
             return view('center',$user_info);
         }else{
@@ -206,15 +210,20 @@ class Index extends Controller
 
         //判断用户是否已签到过
         $today = strtotime( date('Y-m-d') ) ;     // 今天开始时的时间戳
+        // select * from qiandao where uid=123 and add_time>=$today
         $record = Db::table('p_qiandao')->where('uid','=',$uid)
             ->where("add_time",'>=',$today)->all();
-        // select * from qiandao where uid=123 and add_time>=$today
+
 
         if($record)     // 已经签到过了
         {
             $this->error("您已经签到过了");
         }else{
-            // 2 签到信息入库 uid  签到时间
+
+            //赠送 100 积分
+            Db::table('p_users')->where('uid','=',$uid)->setInc('score',100);
+
+            // 签到信息入库 uid  签到时间
             $id = Db::table('p_qiandao')->insertGetId(['uid'=>$uid,'add_time'=>time()]);
             if($id)
             {
