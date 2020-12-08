@@ -263,4 +263,53 @@ class Index extends Controller
 
 
     }
+
+    /**
+     * 修改密码
+     */
+    public function changePass()
+    {
+        return view('change-pass');
+    }
+
+    public function changepass2(Request $request)
+    {
+        $uid = session('uid');
+        $pass0 = $request->post('pass0');
+        $pass1 = $request->post('pass1');
+        $pass2 = $request->post('pass2');
+
+        //密码不能为空
+        if(empty($pass0) || empty($pass1) || empty($pass2))
+        {
+            $this->error("密码不能为空");
+        }
+
+        //两个新密码是否一致
+        if($pass1 != $pass2)
+        {
+            $this->error('新密码不一致');
+        }
+
+        //获取用户信息
+        $u = Db::table('p_users')->where(['uid'=>$uid])->find();
+        //验证当前密码是否正确
+        $status = password_verify($pass0,$u['pass']);
+        if(!$status)
+        {
+            $this->error("当前密码不正确");
+        }
+
+        // 生成新密码
+        $new_pass = password_hash($pass1,PASSWORD_BCRYPT);
+
+        //更新用户表中的用户密码
+        Db::table('p_users')->where("uid",'=',$uid)->update(['pass'=>$new_pass]);
+
+        //修改成功后 清空session中的登录信息 重新登录
+        session('user_name',null);
+        session('uid',null);
+        $this->success("密码修改成功",'/');
+    }
+
 }
