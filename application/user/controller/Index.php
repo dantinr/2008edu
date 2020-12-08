@@ -114,6 +114,19 @@ class Index extends Controller
         $pass = $_POST['pass'];
         $now = time();
 
+        //检查用户是否被锁定 查看登录记录表中一小时内三条记录 是否都是错误的登录
+        $login_records = Db::table('p_login_history')->where('user_name','=',$name)
+            ->where('status','=',0)
+            ->where('login_time','>',$now-3600)
+            ->order('id','desc')->all();
+
+        if( count($login_records) >=3 )     // 一小时内错误次数超过三次 禁止用户登录
+        {
+            $this->error("密码错误次数太多，账户已被锁定");
+            exit;
+        }
+
+
         //查询数据库中记录
         $u = Db::table('p_users')->where(['user_name'=>$name])
             ->whereOr(['email'=>$name])
@@ -132,10 +145,27 @@ class Index extends Controller
                 session('uid',$u['uid']);
                 session('login_time',date('Y-m-d H:i:s',$now));
 
+                //记录登录成功的信息
+                $login_info = [
+                    'uid'           => $u['uid'],
+                    'user_name'     => $u['user_name'],
+                    'login_time'    => $now,
+                    'status'        => 1
+                ];
+                Db::table('p_login_history')->insert($login_info);
+
                 $this->success('登录成功', '/index.php?s=user/index/center');
 
             }else{
-                echo "密码错误";
+                //记录登录错误
+                $error_info = [
+                    'uid'           => $u['uid'],
+                    'user_name'     => $u['user_name'],
+                    'login_time'    => $now,
+                    'status'        => 0
+                ];
+                Db::table('p_login_history')->insert($error_info);
+                $this->error('用户名或密码错误');
             }
 
         }else{
