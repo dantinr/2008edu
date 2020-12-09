@@ -182,7 +182,7 @@ class Index extends Controller
     {
 
         $name = session('name');        //取 session中的 name字段
-        $uid = \session('uid');
+        $uid = session('uid');
         if($name)
         {
 
@@ -210,6 +210,7 @@ class Index extends Controller
                 'qiandao'   => $qiandao,        //签到状态
                 'qiandao_time'   => $qiandao_time,        //签到时间
                 'score'     => $u['score'],
+                'avatar'    => $u['avatar'],            //头像
             ];
             return view('center',$user_info);
         }else{
@@ -310,6 +311,37 @@ class Index extends Controller
         session('user_name',null);
         session('uid',null);
         $this->success("密码修改成功",'/');
+    }
+
+
+    /**
+     * 上传头像
+     */
+    public function uploadAvatar()
+    {
+        return view('upload-avatar');
+    }
+
+    public function uploadavatar2(Request  $request)
+    {
+
+        $uid = session('uid');
+        $save_path = 'uploads/';            //文件的保存路径  public/uploads
+
+        $file = request()->file('image');   //接收文件
+        $info = $file->move($save_path);
+        if($info){
+            // 成功上传后 获取上传信息
+            $file_path = $save_path . $info->getSaveName();
+
+            //更新用户表 头像字段
+            Db::table('p_users')->where(['uid'=>$uid])->update(['avatar'=>$file_path]);
+
+            $this->success("头像上传成功");
+        }else{
+            // 上传失败获取错误信息
+            echo $file->getError();echo '</br>';
+        }
     }
 
 }

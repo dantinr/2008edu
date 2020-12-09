@@ -7,12 +7,15 @@
 <body>
     <h1>用户中心</h1><br>
     <a href="/index.php?s=user/index/changepass">修改密码</a> |
+    <a href="/index.php?s=user/index/uploadavatar">上传头像</a> |
     <a href="/index.php?s=user/index/logout">退出登录</a> |
     {if $qiandao}
     <span>已签到（{$qiandao_time}）</span>
     {else /}
     <a href="/index.php?s=user/index/qiandao">签到</a>
     {/if}
+    <hr>
+    <img src="{$avatar}" alt="">
     <hr>
     当前时间： {$time} <br>
     用户ID： {$user_name} <br>
