@@ -18,21 +18,28 @@ class Index
      */
     public function goodslist()
     {
-        $sql = "select * from p_goods limit 0,5";
-        $list = Db::query($sql);
 
-        //echo '<pre>';print_r($list);echo '</pre>';
+        $page = $_GET['page'];          // 获取当前的页号
+        $size = 10;                     //每页展示记录数
+
+        echo "当前页号：". $page;echo '</br>';
+
+        $start = ($page-1) * $size;     // 1=>0 2=>10 3 20
+
+        $sql = "select * from p_goods limit $start,$size";
+        echo "sql语句： ". $sql;
+
+        $list = Db::query($sql);
 
         echo "<ul>";
         foreach($list as $k=>$v)
         {
             echo "<li>";
-            echo "商品名：". $v['goods_name'];
+            echo  '(' . $v['goods_id'] .')'. "商品名：". $v['goods_name'];
             echo "</li>";
         }
         echo "</ul>";
 
-        //return view('goods-list',$list);
     }
 
 }
