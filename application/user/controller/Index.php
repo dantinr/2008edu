@@ -337,7 +337,7 @@ class Index extends Controller
             //更新用户表 头像字段
             Db::table('p_users')->where(['uid'=>$uid])->update(['avatar'=>$file_path]);
 
-            $this->success("头像上传成功");
+            $this->success("头像上传成功",'/index.php?s=user/index/center');
         }else{
             // 上传失败获取错误信息
             echo $file->getError();echo '</br>';
