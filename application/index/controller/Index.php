@@ -5,7 +5,7 @@ use think\Controller;
 
 class Index
 {
-    public function index()
+    public function index0()
     {
         $uid = session('uid');
         //判断用户是否登录
@@ -16,6 +16,14 @@ class Index
             return redirect('/index.php?s=user/index/center');
         }
 
+    }
+
+    /**
+     * 网站首页
+     */
+    public function index()
+    {
+        return view();
     }
 
 }
