@@ -1,0 +1,19 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>分页</title>
+
+    <link rel="stylesheet" href="/css/main.css">
+</head>
+<body>
+    <div>
+        <ul>
+            {volist name='list' id='goods'}
+            <li> {$goods.goods_id} - {$goods.goods_name}</li>
+            {/volist}
+        </ul>
+    </div>
+    {$page|raw}
+</body>
+</html>

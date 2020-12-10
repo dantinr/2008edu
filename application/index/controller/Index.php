@@ -3,7 +3,7 @@ namespace app\index\controller;
 use think\Db;
 use think\Controller;
 
-class Index
+class Index extends Controller
 {
     public function index()
     {
@@ -15,6 +15,23 @@ class Index
         }else{       // 已登录 跳转至个人中心
             return redirect('/index.php?s=user/index/center');
         }
+
+    }
+
+
+    public function liebiao()
+    {
+        $offset = 5;               // 每页显示的数据数量
+
+        $list = Db::name('p_goods')->paginate($offset);
+
+        $page = $list->render();
+        // 模板变量赋值
+        $this->assign('list', $list);
+        $this->assign('page', $page);
+        // 渲染模板输出
+        return $this->fetch();
+
 
     }
 
