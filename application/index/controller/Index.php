@@ -5,7 +5,7 @@ use think\Controller;
 
 class Index extends Controller
 {
-    public function index()
+    public function index0()
     {
         $uid = session('uid');
         //判断用户是否登录
@@ -31,8 +31,15 @@ class Index extends Controller
         $this->assign('page', $page);
         // 渲染模板输出
         return $this->fetch();
+    }
 
 
+    /**
+     * 网站首页
+     */
+    public function index()
+    {
+        return view();
     }
 
 }
