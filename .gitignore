@@ -6,5 +6,4 @@ thinkphp
 .env
 .DS_Store
 dianming.php
-test/
 public/uploads/

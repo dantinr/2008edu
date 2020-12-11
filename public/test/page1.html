@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>DOM1</title>
+</head>
+<body>
+
+    <button id="btn1">AJAX异步请求</button>
+
+    <ul id="ul1">
+
+    </ul>
+
+
+
+    <script>
+
+
+        var page = 1;
+        var oBtn1 = document.getElementById("btn1")
+        oBtn1.addEventListener('click',function(){
+            getGoodsList()
+        });
+
+
+        function getGoodsList(){
+
+            var api_url = 'http://tp.2008.com/index.php?s=api/index/goodslist&page=' + page
+            page++;
+            // 1 实例化 XHR
+            var xhr = new XMLHttpRequest()
+
+            // 检测 readyState 状态
+            xhr.onreadystatechange = function () {
+                if (xhr.readyState == 4 && xhr.status == 200) {
+                    var json_str = xhr.responseText         //接收服务器的响应
+                    var arr = JSON.parse(json_str)          //将JSON字符串转为 js 数组对象
+
+                    var oul = document.getElementById('ul1')    //获取页面某个节点对象
+
+                    arr.forEach(function (v, k) {
+                        //创建节点、添加到DOM中
+                        var oli = document.createElement('li');     // 创建 li
+                        var content = document.createTextNode("[" + v.goods_id +  "]商品名: " + v.goods_name + " " + v.shop_price)
+                        oli.append(content);        // 向li中添加内容
+                        oul.appendChild(oli)
+                    })
+                }
+            }
+
+            xhr.open('GET', api_url);
+            xhr.send()
+        }
+
+
+
+    </script>
+</body>
+</html>
