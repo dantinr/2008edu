@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+
+    <style>
+        #div1{width: 500px;height: 500px;background-color: red}
+        #div2{width: 400px;height: 400px;background-color: green;
+            position: absolute;
+            top: 50px;
+            left: 50px;
+        }
+        #div3{width: 300px;height: 300px;background-color: blue;
+            position: absolute;
+            top: 50px;
+            left: 50px;
+        }
+    </style>
+</head>
+<body>
+
+
+<script>
+
+    var oA1 = document.getElementById("baidu")
+    oA1.addEventListener('click',function (e){
+        alert("要访问百度了")
+        e.preventDefault()
+    })
+
+    var oDiv1 = document.getElementById("div1")
+    var oDiv2 = document.getElementById("div2")
+    var oDiv3 = document.getElementById("div3")
+    oDiv1.addEventListener('click',function (e){
+        console.log(e)
+        console.log("div1")
+    })
+
+    oDiv2.addEventListener('click',function (e){
+        console.log(e)
+        console.log("div2")
+    })
+
+    oDiv3.addEventListener('click',function (e){
+        e.stopPropagation();
+        console.log("div3")
+    })
+</script>
+</body>
+</html>

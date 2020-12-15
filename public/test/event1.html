@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+
+<button id="btn1">BUTTON1</button>
+<p id="p1"> PPPPPPPP </p>
+
+<script>
+    var btn1 = document.getElementById("btn1")
+    btn1.addEventListener('click',function(e){
+        console.log(11111)
+        console.log(e)
+    })
+
+    var oP1 = document.getElementById('p1')
+    oP1.addEventListener('dblclick',function(){
+        console.log("鼠标双击")
+    })
+    oP1.addEventListener('mousedown',function(){
+        console.log("鼠标按下")
+    })
+
+    document.addEventListener('keydown',function(){
+        console.log('keydown')
+    })
+</script>
+</body>
+</html>

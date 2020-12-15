@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+
+<form id="form1" action="/index.php?s=api/index/form1" method="post" enctype="multipart/form-data">
+    用户名： <input type="text" name="user_name"> <br>
+    密码： <input type="password" name="pass1"> <br>
+    <input type="hidden" name="uid" value="12345"> <br>
+    Email: <input type="email" name="email"><br>
+
+    <textarea name="" id="" cols="30" rows="5">
+
+    </textarea> <br>
+
+
+
+    <button>按钮</button>
+    <hr>
+
+    请选择等级:
+    <select id="simple" name="choice">
+        <option value="1">A</option>
+        <option value="2">B</option>
+        <option value="3">C</option>
+    </select>
+
+    <br>
+    <select multiple id="multi" name="multi">
+        <option>Banana</option>
+        <option>Cherry</option>
+        <option>Lemon</option>
+    </select>
+
+
+    <br>
+    A<input type="checkbox" checked  name="xx[]" value="1">
+    B<input type="checkbox" checked  name="xx[]" value="2">
+    C<input type="checkbox"   name="xx[]" value="3">
+    D<input type="checkbox"   name="xx[]" value="4">
+
+    <hr>
+    单选
+    A: <input type="radio" checked  name="age" value="11">
+    B: <input type="radio" name="age" value="22">
+    C: <input type="radio" name="age" value="33">
+    <br>
+
+
+    <button id="btn1">AAA</button>
+
+</form>
+
+<script>
+
+
+    // 获取节点对象
+    var oBtn1 = document.getElementById("btn1")
+    oBtn1.addEventListener('click',function(){
+        alert(111111)
+    })
+
+    // 获取 id 为 form1的表单
+    var f1 = document.getElementById("form1")
+    console.log(typeof f1)
+
+    //表单提交
+    //f1.submit();
+
+
+</script>
+</body>
+</html>

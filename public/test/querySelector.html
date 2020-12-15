@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+
+    <div id="div1">
+        <p class="pp">AAAA</p>
+        <p id="p2">BBBB</p>
+        <p class="pp">CCCC</p>
+        <p class="pp">DDDD</p>
+    </div>
+
+    <script>
+        var ps = document.querySelectorAll(".pp")
+
+
+
+        var div = document.getElementById("div1")
+        console.log(div)
+        var p1 = document.createElement("p")
+        p1.append("ZXXX")
+        div.insertBefore(p1,p2)
+
+    </script>
+</body>
+</html>

@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <style>
+        #div1 { width: 500px;height: 500px;border: 1px solid red; background-color: red}
+        #div2 { width: 400px;height: 400px;border: 1px solid green;background-color: green;
+            position: absolute; top:50px;left:50px;
+        }
+        #div3 { width: 300px;height: 300px;border: 1px solid blue;background-color: blue;
+            position: absolute; top:50px;left:50px;
+        }
+    </style>
+</head>
+<body>
+
+
+    <div id="div1">
+        <div id="div2">
+            <div id="div3">
+
+            </div>
+        </div>
+    </div>
+
+    <hr>
+    <a href="https://www.baidu.com" id="baidu">BAIDU</a>
+
+<script>
+    var oDiv1 = document.getElementById('div1');
+    var oDiv2 = document.getElementById('div2');
+    var oDiv3 = document.getElementById('div3');
+    var oA1 = document.getElementById('baidu');
+    oA1.addEventListener('click',function (e){
+        e.preventDefault();
+    })
+
+
+    oDiv3.addEventListener('click',function(e){
+        console.log(e)
+        alert("div3被点击了")
+    })
+
+    oDiv2.addEventListener('click',function(e){
+        console.log(e)
+        alert("div2被点击了")
+    })
+
+    oDiv1.addEventListener('click',function(e){
+        console.log(e)
+        alert("div1被点击了")
+    })
+
+    // document.addEventListener('click',function (e){
+    //     console.log(e)
+    //     alert("文档被点击了")
+    // })
+
+</script>
+</body>
+</html>
