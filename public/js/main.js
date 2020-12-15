@@ -1,93 +1,52 @@
-var oName = document.getElementById("user_name")
+//服务器地址
+let url = 'http://tp.2008.com/index.php?s=api/index/check';
+// 获取
+let oName = document.getElementById('user_name')
+let oEmail = document.getElementById("email")
+let oMobile = document.getElementById("mobile")
 
-var oMoibile = document.getElementById("mobile")
-
-// 1 user_name 的  blur事件
-oName.addEventListener('blur',function(){
-    var name = this.value;          // 用户名
-
-
-    // Ajax
-    var xhr = new XMLHttpRequest();
-    xhr.onreadystatechange = function(){
-        if(xhr.readyState==4 && xhr.status==200)
-        {
-            var json_str = xhr.responseText         //接收服务器的响应
-            var od = JSON.parse(json_str)
-            console.log(od)
-            if(od.errno==0)     //
-            {
-                alert("看来用户名可以使用")
-            }else{
-                alert("看来用户名不可以使用")
-            }
-
-        }
+//验证用户名
+oName.addEventListener('blur',function(e){
+    console.log("验证用户名")
+    // 发送的参数
+    let params = {
+        name: this.value
     }
-
-    xhr.open('GET','/index.php?s=api/index/check&name=' + name)
-    xhr.send()
+    let callback = function(d){
+        alert(d.msg)
+    }
+    ajax('get',url,callback,params)
 })
 
-// email 的 blur事件
-var oEmail = document.getElementById("email")
+//验证Email
 oEmail.addEventListener('blur',function(e){
-    //获取 input 中 value
-    var email = this.value
-    console.log(email)
-
-    // Ajax
-    var xhr = new XMLHttpRequest();
-    xhr.onreadystatechange = function(){
-        if(xhr.readyState==4 && xhr.status==200)
-        {
-            var json_str = xhr.responseText         //接收服务器的响应
-            var od = JSON.parse(json_str)
-            console.log(od)
-            if(od.errno==0)     //
-            {
-                alert(od.msg)
-            }else{
-                alert(od.msg)
-            }
-
-        }
+    console.log("验证Email")
+    // 发送的参数
+    let params = {
+        name: this.value
     }
-
-    xhr.open('GET','/index.php?s=api/index/check&email=' + email)
-    xhr.send()
-
+    //处理服务器响应
+    let callback = function(d){
+        alert(d.msg)
+    }
+    ajax('get',url,callback,params)
 })
 
-//验证电话号
-var oMobile = document.getElementById("mobile")
+//验证Mobile
 oMobile.addEventListener('blur',function(e){
-    //获取 input 中 value
-    var mobile = this.value
-    console.log(mobile)
-
-
-    // Ajax
-    var xhr = new XMLHttpRequest();
-    xhr.onreadystatechange = function(){
-        if(xhr.readyState==4 && xhr.status==200)
-        {
-            var json_str = xhr.responseText         //接收服务器的响应
-            var od = JSON.parse(json_str)
-            if(od.errno==0)     //
-            {
-                alert(od.msg)
-            }else{
-                alert(od.msg)
-            }
-
-        }
+    console.log("验证手机号")
+    // 发送的参数
+    let params = {
+        mobile: this.value
     }
-
-    xhr.open('GET','/index.php?s=api/index/check&mobile=' + mobile)
-    xhr.send()
-
+    //处理服务器响应
+    let callback = function(d){
+        alert(d.msg)
+    }
+    ajax('get',url,callback,params)
 })
+
+
 
 //验证密码
 var oP1 = document.getElementById("pass1")
