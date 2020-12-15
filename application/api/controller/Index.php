@@ -35,27 +35,79 @@
         /**
          * 验证用户名是否存在
          */
-        public function checkname(Request $request)
+        public function check(Request $request)
         {
             $name = $request->get('name');
-            $u = Db::table('p_users')->where("user_name",$name)->find();
+            $email = $request->get('email');
+            $mobile = $request->get('mobile');
 
-            if($u)
+
+            //检测Email
+            if($email)
             {
-                $response = [
-                    'errno' => 300001,
-                    'msg'   => '用户名已存在'
-                ];
-            }else{
+                $u = Db::table('p_users')->where("email",$email)->find();
+                if($u)
+                {
+                    $response = [
+                        'errno' => 300002,
+                        'msg'   => 'Email已存在'
+                    ];
+                }else{
+                    $response = [
+                        'errno' => 0,
+                        'msg'   => 'EMail可以使用'
+                    ];
 
-                $response = [
-                    'errno' => 0,
-                    'msg'   => '可以使用'
-                ];
+                }
 
+                echo json_encode($response);
             }
 
-            echo json_encode($response);        //返回 JSON字符串
+            //检测用户名
+            if($name)
+            {
+                $u = Db::table('p_users')->where("user_name",$name)->find();
+
+                if($u)
+                {
+                    $response = [
+                        'errno' => 300001,
+                        'msg'   => '用户名已存在'
+                    ];
+                }else{
+
+                    $response = [
+                        'errno' => 0,
+                        'msg'   => '可以使用'
+                    ];
+
+                }
+
+                echo json_encode($response);        //返回 JSON字符串
+            }
+
+            //检测电话号
+            if($mobile)
+            {
+                $u = Db::table('p_users')->where("mobile",$mobile)->find();
+
+                if($u)
+                {
+                    $response = [
+                        'errno' => 300003,
+                        'msg'   => '电话号已存在'
+                    ];
+                }else{
+
+                    $response = [
+                        'errno' => 0,
+                        'msg'   => '电话号可以使用'
+                    ];
+
+                }
+
+                echo json_encode($response);        //返回 JSON字符串
+            }
 
         }
     }

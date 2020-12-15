@@ -1,13 +1,3 @@
-.pagination {
-
+body {
+    background-color: yellow;
 }
-.pagination li {
-    float: left;
-    width: 60px;
-    height: 30px;
-}
-/*.pagination a {*/
-/*    width: 40px;*/
-/*    height: 30px;*/
-/*    line-height: 30px;*/
-/*}*/

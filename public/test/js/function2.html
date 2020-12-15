@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+
+
+<button id="btn1">HELLO</button>
+
+<script src="/js/ajax.js"></script>
+
+<script>
+
+    var arr = ['a','b','c','d','e']
+
+    var obj = {
+        name: "zhangsan",
+        age: 11,
+        email: "zhangsan@qq.com"
+    }
+
+
+    ajax({
+        //url: "http://tp.2008.com/index.php?s=api/index/goodslist",
+        url: "http://tp.2008.com/test/php/test.php",
+        method: "get",
+        data:{name:"zhangsan",age:22},
+        success:function(){
+            console.log('success')
+        }
+    })
+</script>
+
+</body>
+</html>

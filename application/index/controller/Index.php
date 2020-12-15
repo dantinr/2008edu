@@ -42,4 +42,7 @@ class Index extends Controller
         return view();
     }
 
+
+
+
 }

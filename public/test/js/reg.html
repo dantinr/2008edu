@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <link rel="stylesheet" href="/css/main.css">
+
+</head>
+<body>
+    <form action="" method="post">
+        用户名: <input type="text" name="user_name" id="user_name" > <br>
+        Email: <input type="text" name="email" id="email"> <br>
+        手机号: <input type="text" name="mobile" id="mobile"> <br>
+        密码： <input type="password" name="pass1" autocomplete="" id="pass1"> <br>
+        确认密码： <input type="password" name="pass2" autocomplete="" id="pass2"> <br>
+        <input type="submit" value="提交">
+    </form>
+
+    <script src="/js/main.js"></script>
+    <script src="/js/functions.js"></script>
+
+
+    <script>
+        let method = 'get'
+        let url = 'http://tp.2008.com/index.php?s=api/index/goodslist'
+        let bb = function(){
+            console.log(22222)
+        }
+        ajax(method,url,bb);
+
+    </script>
+
+</body>
+</html>
