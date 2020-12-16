@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>正则表达式</title>
+    <style>
+        span {
+            font-size: 14px;
+            color:green;
+        }
+
+        .green {
+            color: green;
+        }
+
+        .red {
+            color: red;
+        }
+    </style>
+</head>
+<body>
+
+    <form action="" method="post">
+        用户名: <input type="text" name="user_name" id="user_name" ><span class="tip">用户名由英文字母数字下划线组成</span><br>
+        Email: <input type="text" name="email" id="email"> <span  class="tip">Email格式不正确</span> <br>
+        手机号: <input type="text" name="mobile" id="mobile"> <span  class="tip">手机号格式不正确</span> <br>
+        密码： <input type="password" name="pass1" autocomplete="" id="pass1"> <br>
+        确认密码： <input type="password" name="pass2" autocomplete="" id="pass2"> <span  class="tip">密码不匹配</span> <br>
+
+        <input type="reset" value="重置">
+        <input type="submit" value="提交">
+    </form>
+
+    <script>
+        let oName = document.getElementById("user_name")
+        oName.addEventListener('blur',function(){
+            let name = this.value
+            //通过正则表达式验证是否匹配规则
+            let exp = /^[a-zA-Z0-9_]{4,8}$/
+            let res = exp.test(name)
+            let oTip = this.nextSibling
+            if(res==false)  //验证不通过
+            {
+                this.focus()
+                //oTip.style.color = 'red'      修改行内样式
+                let clas = oTip.getAttribute('class')
+                console.log(clas)
+                oTip.setAttribute('class',clas + ' red')
+            }else{
+                oTip.style.color = 'green'
+            }
+
+        })
+
+        let oEmail = document.getElementById("email")
+        oEmail.addEventListener('blur',function(){
+            let email = this.value
+            console.log(email)
+            //正则验证
+            let exp = /@+/
+            let res = exp.test(email)
+            if(res==false)
+            {
+
+            }
+        })
+
+        let oMobile = document.getElementById("mobile")
+        oMobile.addEventListener('blur',function(){
+            let mobile = this.value
+            console.log(mobile)
+            //正则验证
+            let exp = /^1[0-9]{10}$/
+            let res = exp.test(mobile)
+            if(res==false)
+            {
+
+            }
+        })
+
+
+    </script>
+</body>
+</html>

@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Style</title>
+</head>
+<body>
+    <p id="p1" title="鼠标悬停提示">Hello World</p>
+
+    <button id="btn1">改变颜色1</button>
+    <button id="btn2">设置class</button>
+    <button id="btn3">移除class</button>
+    <button id="btn4">添加属性</button>
+    <button id="btn5">移除属性</button>
+
+    <script>
+
+        let oBtn4 = document.getElementById("btn4")
+        oBtn4.addEventListener('click',function(){
+            let oP1 = document.getElementById("p1")
+            let attr = oP1.getAttribute('title')
+            console.log(attr)
+            //oP1.setAttribute('title',"这是title")
+        })
+
+        let oBtn5 = document.getElementById("btn5")
+        oBtn5.addEventListener('click',function(){
+            let oP1 = document.getElementById("p1")
+            oP1.removeAttribute('title')
+        })
+
+        let oBtn1 = document.getElementById("btn1")
+        oBtn1.addEventListener('click',function(){
+            let oP1 = document.getElementById("p1")
+            oP1.style.color = 'red'     //
+        })
+
+        let oBtn2 = document.getElementById("btn2")
+        oBtn2.addEventListener('click',function(){
+            let oP1 = document.getElementById("p1")
+            oP1.setAttribute('class','xxx')
+        })
+
+        let oBtn3 = document.getElementById("btn3")
+        oBtn3.addEventListener('click',function(){
+            let oP1 = document.getElementById("p1")
+            oP1.removeAttribute('class')
+        })
+
+
+    </script>
+</body>
+</html>
