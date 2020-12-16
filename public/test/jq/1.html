@@ -1,0 +1,34 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport"
+          content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>JQ1</title>
+</head>
+<body>
+
+
+<button id="btn1">BTN1</button>
+<button id="btn2">AJAX</button>
+
+<p class="pp">AAA</p>
+<p class="pp">BBB</p>
+<p class="pp">CCC</p>
+
+
+<script src="/js/jquery-3.5.1.js"></script>
+<script>
+    $("#btn2").on('click',function(){
+        $.ajax({
+            method: 'get',
+            url: 'http://tp.2008.com/index.php?s=api/index/goodslist',
+        }).done(function(data){
+            console.log(data)
+        })
+    })
+
+</script>
+</body>
+</html>
