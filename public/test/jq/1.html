@@ -13,19 +13,27 @@
 <button id="btn1">BTN1</button>
 <button id="btn2">AJAX</button>
 
-<p class="pp">AAA</p>
-<p class="pp">BBB</p>
-<p class="pp">CCC</p>
+<input type="text" id="input1">
+<button id="btn3">BTN3</button>
+<hr>
+
 
 
 <script src="/js/jquery-3.5.1.js"></script>
 <script>
+
+    $("#btn3").on('click',function(){
+        var cont = $("#input1").val()
+        console.log(cont)
+    })
+
+
+
+    console.log(1111111111111111)
+
     $("#btn2").on('click',function(){
-        $.ajax({
-            method: 'get',
-            url: 'http://tp.2008.com/index.php?s=api/index/goodslist',
-        }).done(function(data){
-            console.log(data)
+        $(".pp").on('click',function(){
+            console.log(this.text)
         })
     })
 

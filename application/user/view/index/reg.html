@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en">
+<html>
 <head>
     <meta charset="UTF-8">
     <title>用户注册</title>
@@ -8,13 +8,16 @@
     <h1>用户注册</h1>
     <hr>
 
-    <form action="/index.php?s=user/index/regdo" method="post">
-        用户名: <input type="text" name="user_name"> <br>
+    <form id="reg" action="/index.php?s=user/index/regdo" method="post">
+        用户名: <input type="text" name="user_name" id="user_name"><span id="name_tip" style="display: none">用户名不符合规则</span> <br>
         Email: <input type="text" name="email"> <br>
         手机号: <input type="text" name="mobile"> <br>
-        密码： <input type="password" name="pass1"> <br>
-        确认密码： <input type="password" name="pass2"> <br>
-        <input type="submit" value="提交">
+        密码： <input type="password" name="pass1" autocomplete=""> <br>
+        确认密码： <input type="password" name="pass2" autocomplete=""> <br>
+        <input type="submit" value="提交" id="sub_btn">
     </form>
+
+    <script src="/js/jquery-3.5.1.js"></script>
+    <script src="/js/user.js"></script>
 </body>
 </html>
