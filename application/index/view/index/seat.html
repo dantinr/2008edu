@@ -9,12 +9,12 @@
 
     <h1>房间预订</h1>  <span id="time"></span>
     <div id="app">
-        {volist name="aaa" id="vo"}
+        {volist name="list" id="vo"}
             <div class="seat {if $vo.status==1} red {else /} green {/if}" data-id="{$vo.id}" data-status="{$vo.status}">
                 {if $vo.status==1}
                     <button class="btn" disabled>已预订</button>
                 {else /}
-                    <button class="btn" dis>可预订</button>
+                    <button class="btn" disabled>可预订</button>
                 {/if}
                 <h1 class="nickname">{$vo.name}</h1>
             </div>

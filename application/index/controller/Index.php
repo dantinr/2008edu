@@ -51,7 +51,7 @@ class Index extends Controller
     {
         $list = Db::table('p_seats')->all();
         $data = [
-            'aaa'  => $list
+            'list'  => $list
         ];
         return view('seat',$data);
     }
