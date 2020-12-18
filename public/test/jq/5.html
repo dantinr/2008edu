@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <style>
+        #div1 { width: 200px;height: 200px; background-color: #4288ce;}
+    </style>
+</head>
+<body>
+
+    <div id="div1">
+
+    </div>
+    <br>
+    <button id="btn1">红色</button>
+    <button id="btn2">绿色</button>
+    <button id="btn3">蓝色</button>
+
+
+    <script src="/js/jquery-3.5.1.js"></script>
+    <script>
+        $("#btn1").click(function(){
+            $("#div1").css('background-color','red')
+        })
+        $("#btn2").click(function(){
+            $("#div1").css('background-color','green')
+        })
+        $("#btn3").click(function(){
+            $("#div1").css('background-color','blue')
+        })
+
+    </script>
+
+</body>
+</html>

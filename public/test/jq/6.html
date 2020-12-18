@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <style>
+        #ul1 { list-style-type: none;width: 200px}
+    </style>
+</head>
+<body>
+
+    <ul id="ul1">
+        <li>AAA</li>
+        <li>AAA</li>
+        <li>AAA</li>
+        <li>AAA</li>
+        <li>AAA</li>
+        <li>AAA</li>
+        <li>AAA</li>
+    </ul>
+
+    <script src="/js/jquery-3.5.1.js"></script>
+    <script>
+        $("#ul1 li").even().on('mouseover',function(){
+            $(this).css('background-color','red')
+        }).on('mouseout',function(){
+            $(this).css('background-color','')
+        })
+
+        $("#ul1 li").odd().on('mouseover',function(){
+            $(this).css('background-color','green')
+        }).on('mouseout',function(){
+            $(this).css('background-color','')
+        })
+
+    </script>
+
+</body>
+</html>

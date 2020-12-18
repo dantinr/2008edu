@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <style>
+        #div1 { border: 5px solid red}
+        .red {
+            background-color:red;
+        }
+        .green {
+            background-color: green;
+        }
+        .yellow {
+            background-color: yellow;
+        }
+        #div3 {width: 200px;height: 200px;}
+    </style>
+</head>
+<body>
+<form action="">
+    <input type="text" id="input1">
+</form>
+
+    <div id="div1">
+        <div id="div3" class="yellow"></div>
+        <ul id="ul1">
+            <li>AAAA</li>
+            <li>BBBB</li>
+            <li id="ccc">CCCC</li>
+            <li>DDDD</li>
+        </ul>
+        <ul id="ul2">
+            <li>ZZZZ</li>
+            <li>YYYY</li>
+            <li id="xxx">XXXX</li>
+            <li>OOOO</li>
+            <li>PPPP</li>
+            <li>QQQQ</li>
+            <li>SSSS</li>
+        </ul>
+        <ul id="ul3">
+            <li><button>按钮1</button></li>
+            <li><button>按钮2</button></li>
+            <li><button>按钮3</button></li>
+            <li><button>按钮4</button></li>
+            <li><button>按钮5</button></li>
+            <li><button>按钮6</button></li>
+        </ul>
+
+        <div id="div2">
+            <span>Hello</span><span>JQuery</span><span>PHP</span>
+        </div>
+
+    </div>
+
+
+    <script src="/js/jquery-3.5.1.js"></script>
+    <script>
+        $("#input1").keydown(function (){
+            console.log(111111111)
+        })
+
+        var color = ['yellow','red','green']
+        $("#div3").mousemove(function(){
+            console.log(Math.ceil(Math.random()*10) % 3)
+            var random = Math.ceil(Math.random()*10) % 3
+            $(this).attr('class','')
+            $(this).attr('class',color[random])
+
+        })
+
+    </script>
+
+</body>
+</html>
