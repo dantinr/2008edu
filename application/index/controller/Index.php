@@ -2,6 +2,7 @@
 namespace app\index\controller;
 use think\Db;
 use think\Controller;
+use think\Request;
 
 class Index extends Controller
 {
@@ -43,6 +44,30 @@ class Index extends Controller
     }
 
 
+    /**
+     * @return
+     */
+    public function seat()
+    {
+        $list = Db::table('p_seats')->all();
+        //echo '<pre>';print_r($list);echo '</pre>';
+        $data = [
+            'list'  => $list
+        ];
+        return view('seat',$data);
+    }
+
+    public function reserve(Request $request)
+    {
+        $id = $request->post('id');
+        Db::table('p_seats')->where('id',$id)->update(['status'=>1,'add_time'=>time()]);
+        $response = [
+            'errno' => 0,
+            'msg'   => 'ok'
+        ];
+
+        echo json_encode($request);
+    }
 
 
 }
