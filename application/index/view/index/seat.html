@@ -2,63 +2,31 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <title>订座系统</title>
-
-    <style>
-        #app { width: 600px; height: 250px}
-        .seat { width: 100px;height: 100px;margin:10px; float: left}
-        .green {background-color: green}
-        .red {background-color: red}
-        #tip {display: block;margin-left:300px;width: 200px;height: 50px;background-color: red}
-    </style>
+    <title>老王会所</title>
+    <link rel="stylesheet" href="/css/main.css">
 </head>
 <body>
 
+    <h1>房间预订</h1>  <span id="time"></span>
     <div id="app">
-        {volist name="list" id="vo"}
+        {volist name="aaa" id="vo"}
             <div class="seat {if $vo.status==1} red {else /} green {/if}" data-id="{$vo.id}" data-status="{$vo.status}">
                 {if $vo.status==1}
                     <button class="btn" disabled>已预订</button>
                 {else /}
-                    <button class="btn" dis>预订</button>
+                    <button class="btn" dis>可预订</button>
                 {/if}
+                <h1 class="nickname">{$vo.name}</h1>
             </div>
 
         {/volist}
     </div>
 
+    <button id="reset">重置</button>
+
     <script src="/js/jquery-3.5.1.js"></script>
-    <script>
-        $(".btn").click(function(){
-            var self = $(this)
-
-            //座位是否已被预订
-            var status = self.parent().attr('data-status')  //1已被预订 0可预订
-            if(status==1)
-            {
-                alert("座位已被预订了，请选择其他座位")
-                return
-            }
-
-            if(confirm('确定预订吗？')){
-                let id = self.parent().attr('data-id')
-                //请求后台
-                $.ajax({
-                    url: '/index.php?s=index/index/reserve',
-                    method: 'post',
-                    data:{id:id},
-                    dataType:'json',
-                }).done(function(){
-                    //修改当前页面状态
-                    self.parent().css('background-color','red')
-                    self.parent().attr('data-status',1)
-                    self.text('已预订').attr('disabled','disabled')
-
-                })
-            }
-
-        })
-    </script>
+    <script src="/js/time.js"></script>
+    <script src="/js/seat.js"></script>
 
 </body>
 </html>

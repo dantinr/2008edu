@@ -50,13 +50,18 @@ class Index extends Controller
     public function seat()
     {
         $list = Db::table('p_seats')->all();
-        //echo '<pre>';print_r($list);echo '</pre>';
         $data = [
-            'list'  => $list
+            'aaa'  => $list
         ];
         return view('seat',$data);
     }
 
+    /**
+     * 预订座位
+     * @param Request $request
+     * @throws \think\Exception
+     * @throws \think\exception\PDOException
+     */
     public function reserve(Request $request)
     {
         $id = $request->post('id');
@@ -66,7 +71,21 @@ class Index extends Controller
             'msg'   => 'ok'
         ];
 
-        echo json_encode($request);
+        echo json_encode($response);
+    }
+
+    /**
+     * 一键重置
+     */
+    public function reserveCancel()
+    {
+        Db::table('p_seats')->where('id','>',0)->update(['status'=>0]);
+        $response = [
+            'errno' => 0,
+            'msg'   => 'ok'
+        ];
+
+        echo json_encode($response);
     }
 
 
