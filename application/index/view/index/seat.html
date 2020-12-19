@@ -8,13 +8,15 @@
 <body>
 
     <h1>房间预订</h1>  <span id="time"></span>
+    <button id="reset">重置</button>
     <div id="app">
+
         {volist name="list" id="vo"}
             <div class="seat {if $vo.status==1} red {else /} green {/if}" data-id="{$vo.id}" data-status="{$vo.status}">
                 {if $vo.status==1}
                     <button class="btn" disabled>已预订</button>
                 {else /}
-                    <button class="btn">可预订</button>
+                    <button class="btn">可预订（￥{$vo.price}）</button>
                 {/if}
                 <h1 class="nickname">{$vo.name}</h1>
             </div>
@@ -22,7 +24,16 @@
         {/volist}
     </div>
 
-    <button id="reset">重置</button>
+    <div id="apply">
+        <form action="" id="apply_form">
+            手机号： <input type="text" name="mobile" id="mobile"> <br>
+            Email: <input type="email" name="email" id="email"> <br>
+            身份证号： <input type="text" name="userid" id="userid"> <br>
+            <input type="submit" value="提交">
+        </form>
+    </div>
+
+
 
     <script src="/js/jquery-3.5.1.js"></script>
     <script src="/js/time.js"></script>

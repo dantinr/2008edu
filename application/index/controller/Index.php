@@ -50,6 +50,9 @@ class Index extends Controller
     public function seat()
     {
         $list = Db::table('p_seats')->all();
+        foreach ($list as $k=>&$v){
+            $v['price'] = $v['price'] / 100 . '.00';
+        }
         $data = [
             'list'  => $list
         ];

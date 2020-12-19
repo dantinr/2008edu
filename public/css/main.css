@@ -1,6 +1,8 @@
-#app { width: 600px; height: 250px}
-.seat { width: 100px;height: 100px;margin:10px; float: left}
+#app { width: 800px; height: 250px;position: absolute}
+.seat { width: 150px;height: 150px;margin:10px; float: left}
 .green {background-color: green}
 .red {background-color: red}
 #tip {display: block;margin-left:300px;width: 200px;height: 50px;background-color: red}
 .nickname {color: white}
+
+#apply {width: 300px;display: none;padding:50px; background-color: #EEEEEE;position: relative;top:120px;left:200px}
