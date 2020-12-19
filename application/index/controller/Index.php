@@ -51,7 +51,7 @@ class Index extends Controller
     {
         $list = Db::table('p_seats')->all();
         foreach ($list as $k=>&$v){
-            $v['price'] = $v['price'] / 100 . '.00';
+            $v['price'] = $v['price'] / 100 . '.00';        //格式化价格显示
         }
         $data = [
             'list'  => $list
