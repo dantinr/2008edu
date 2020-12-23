@@ -148,4 +148,33 @@ class Index extends Controller
     }
 
 
+
+
+    public function u3()
+    {
+        //第二种 调用静态方法create
+        $user = UserModel::create([
+            'user_name'  =>  'zhangsan333',
+            'email' =>  'zhangsan333@qq.com'
+        ]);
+
+        echo $user->uid; // 获取自增ID
+
+
+        die;
+
+
+        // 第一种 属性赋值
+        $user           = new UserModel();
+        $user->user_name     = 'zhangsan222';
+        $user->age           = 22;
+        $user->mobile        = '13312345678';
+        $user->email        = 'zhangsan22@qq.com';
+        $res = $user->save();
+
+        $id = $user->uid;           //获取自增的id
+        var_dump($id);
+
+    }
+
 }

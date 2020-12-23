@@ -1,6 +1,7 @@
 <?php
 namespace app\user\controller;
 
+use app\model\UserModel;
 use think\Controller;
 use think\Db;
 use think\Request;
@@ -75,9 +76,10 @@ class Index extends Controller
         ];
 
         // 用户信息入库
-        $uid = Db::table('p_users')->insertGetId($user_info);
-        if($uid>0){
-            echo "注册成功： ". $uid;echo '</br>';
+        //$uid = Db::table('p_users')->insertGetId($user_info);
+        $u = UserModel::create($user_info);
+        if($u->uid >0){
+            echo "注册成功： ". $u->uid;echo '</br>';
             //注册成功后重定向至登录页面
             redirect('/index.php?s=user/index/login');
 
