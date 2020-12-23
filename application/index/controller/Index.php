@@ -1,5 +1,7 @@
 <?php
 namespace app\index\controller;
+use app\model\OrderModel;
+use app\model\UserModel;
 use think\Db;
 use think\Controller;
 use think\Request;
@@ -89,6 +91,60 @@ class Index extends Controller
         ];
 
         echo json_encode($response);
+    }
+
+
+    public function u()
+    {
+
+        // 找出订单表中最新支付的一个订单
+        $o = OrderModel::where('pay_time','>',0)
+            ->order('order_id','desc')
+            ->limit(1)
+            ->select();
+        echo '<pre>';print_r($o->toArray());echo '</pre>';
+        die;
+
+        // 统计订单表中所有已支付订单的总金额
+        $total = OrderModel::where('pay_time','>',0)->sum('money_paid');
+        var_dump($total);
+        die;
+
+        // 找出订单表中已支付的订单中订单金额最大的前10个订单
+        $list = OrderModel::where('pay_time','>',0)
+            ->field('order_id,order_sn,money_paid,user_id')
+            ->order('money_paid','desc')
+            ->limit(10)
+            ->select()
+            ->toArray();
+
+        echo '<pre>';print_r($list);echo '</pre>';
+
+
+    }
+
+    public function u2()
+    {
+
+        $info = [
+            'user_name' => 'zhangsan111',
+            'email'     => 'zhangsan111@qq.com',
+            'mobile'    => '13111112222',
+        ];
+
+        $u = UserModel::create($info);
+        echo $u->uid;
+        die;
+
+        $user = new UserModel();
+        $user->user_name = 'zhangsan';
+        $user->age = 22;
+        $user->mobile = '13312344321';
+        $user->email = 'zhangsan@qqq.com';
+        $res = $user->save();
+        var_dump($res);echo '</br>';
+        $id = $user->uid;
+        var_dump($id);
     }
 
 
