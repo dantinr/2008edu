@@ -407,10 +407,12 @@
                         <li>
                             <div class="courselist">
                                 <img width="263" style="border-radius:3px 3px 0 0;" src="/images/c1.jpg" >
-                                <p class="courTit"><a href="/index.php?s=course/index/detail?id={$vo.goods_id}">{$vo.goods_name}</a></p>
+                                <p class="courTit">
+                                    <a href="/index.php?s=course/index/detail&id={$vo.goods_id}">{$vo.goods_name}</a>
+                                </p>
                                 <div class="gray">
                                     <span>1小时前更新</span>
-                                    <span class="sp1">1255555人学习</span>
+                                    <span class="sp1">人气：{$vo.click_count}</span>
                                     <div style="clear:both"></div>
                                 </div>
                             </div>
@@ -428,7 +430,7 @@
                         <li>
                             <div class="courselist">
                                 <img width="263" style="border-radius:3px 3px 0 0;" src="/images/c1.jpg" >
-                                <p class="courTit">{$vo.goods_name|substr=0,10}</p>
+                                <p class="courTit">{$vo.goods_name}</p>
                                 <div class="gray">
                                     <span>1小时前更新</span>
                                     <span class="sp1">1255555人学习</span>

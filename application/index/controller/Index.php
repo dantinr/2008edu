@@ -46,9 +46,8 @@ class Index extends Controller
 
         //获取课程列表  分类是php的课程
         $php_list = Db::table('p_goods')
-            ->field('goods_id,goods_name')
+            ->field('goods_id,goods_name,click_count')
             ->where(['cat_id'=>52])->limit(12)->select();
-        //echo '<pre>';print_r($php_list);echo '</pre>';die;
 
         foreach ($php_list as $k=>&$v){
             $v['goods_name'] = mb_substr($v['goods_name'],0,15) . '...';
@@ -56,10 +55,10 @@ class Index extends Controller
 
         //获取 javascript 分类的课程
         $js_list = Db::table('p_goods')
-            ->field('goods_id,goods_name')
+            ->field('goods_id,goods_name,click_count')
             ->where(['cat_id'=>780])->limit(12)->select();
 
-        foreach ($php_list as $k=>&$v){
+        foreach ($js_list as $k=>&$v){
             $v['goods_name'] = mb_substr($v['goods_name'],0,15) . '...';
         }
 
