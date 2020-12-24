@@ -1,5 +1,6 @@
 <?php
 namespace app\course\controller;
+use app\model\CoursefavModel;
 use app\model\CourseModel;
 use think\Db;
 use think\Controller;
@@ -40,6 +41,38 @@ class Index extends Controller
         }
 
     }
+
+    /**
+     * 收藏课程
+     */
+    public function favcourse(Request $request)
+    {
+        $uid = session('uid');                  //获取用户id
+        $course_id = $request->post('id');      //获取课程id
+
+        $data = [
+            'course_id' => $course_id,
+            'uid'       => $uid,
+            'add_time'  => time()               //收藏时间
+        ];
+
+        $res = CoursefavModel::create($data);
+
+        if($res->id){       //收藏成功
+            $response = [
+                'errno' => 0,
+                'msg'   => 'ok'
+            ];
+        }else{
+            $response = [
+                'errno' => 500001,
+                'msg'   => '收藏失败'
+            ];
+        }
+
+        return json($response);             //使用 thinkphp中的 json方法格式化
+    }
+
 
 
 }

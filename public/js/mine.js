@@ -122,11 +122,21 @@ $(function() {
 
 	/*课程收藏*/
 	$(".codol.sc").toggle(function() {
-		$(this).css({
-			"background-images": "url(../images/ico_detail_item.png) no-repeat",
-			"background-position": "0px -1800px"
-		});
-		$(this).text("取消收藏");
+		var self = $(this)
+		var course_id = $(this).attr('data-courseid')		//获取course_id
+		$.ajax({
+			url: '/index.php?s=course/index/favcourse&state=1',		//收藏
+			type: 'POST',
+			data: {id:course_id},
+			dataType: 'json'
+		}).done(function(d){
+			console.log(d)
+			self.css({
+				"background-images": "url(../images/ico_detail_item.png) no-repeat",
+				"background-position": "0px -1800px"
+			});
+			self.text("取消收藏");
+		})
 	},
 	function() {
 		$(this).css({
