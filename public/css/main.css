@@ -1,8 +1,47 @@
-#app { width: 800px; height: 250px;position: absolute}
-.seat { width: 150px;height: 150px;margin:10px; float: left}
-.green {background-color: green}
-.red {background-color: red}
-#tip {display: block;margin-left:300px;width: 200px;height: 50px;background-color: red}
-.nickname {color: white}
+/* -------------------------------------------------- 
+Inspira CSS by Designesia
 
-#apply {width: 300px;display: none;padding:50px; background-color: #EEEEEE;position: relative;top:120px;left:200px}
+Quick enable/disable css files.
+To enable css file simply remove mark '/*' and '* /' between line of css file
+
+/* -------------------------------------------------- */
+
+/* bootstrap framework */
+/*@import url("bootstrap.css");*/
+@import url("../css/settings.css");
+@import url("rev-settings.css");
+
+
+
+/* -------------------------------------------------- 
+widescreen.css used to fit in wide screen monitor (>1200px)
+if you disable this, the container width would be maximum 960px
+/* -------------------------------------------------- 
+@import url("wide-screen.css"); */
+
+
+
+/* -------------------------------------------------- 
+to use boxed layout please enable code below and disable 'wide-screen.css' above
+/* -------------------------------------------------- */
+/* @import url("boxed.css"); */
+
+
+
+
+/* load  color css 
+------------------------------
+select one: 
+aqua.css
+blue.css
+green.css
+grey.css
+red.css
+orange.css
+pink.css
+purple.css
+yellow.css
+*/
+@import url("colors/orange.css");
+
+.courTit a {text-decoration: none}

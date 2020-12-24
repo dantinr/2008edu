@@ -183,6 +183,7 @@ class Index extends Controller
     public function center()
     {
 
+
         $name = session('name');        //取 session中的 name字段
         $uid = session('uid');
         if($name)

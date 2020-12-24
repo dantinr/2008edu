@@ -42,7 +42,33 @@ class Index extends Controller
      */
     public function index()
     {
-        return view();
+        $user = session('name');
+
+        //获取课程列表  分类是php的课程
+        $php_list = Db::table('p_goods')
+            ->field('goods_id,goods_name')
+            ->where(['cat_id'=>52])->limit(12)->select();
+        //echo '<pre>';print_r($php_list);echo '</pre>';die;
+
+        foreach ($php_list as $k=>&$v){
+            $v['goods_name'] = mb_substr($v['goods_name'],0,15) . '...';
+        }
+
+        //获取 javascript 分类的课程
+        $js_list = Db::table('p_goods')
+            ->field('goods_id,goods_name')
+            ->where(['cat_id'=>780])->limit(12)->select();
+
+        foreach ($php_list as $k=>&$v){
+            $v['goods_name'] = mb_substr($v['goods_name'],0,15) . '...';
+        }
+
+        $data = [
+            'user'          => $user,
+            'php_course'    => $php_list,
+            'js_course'     => $js_list
+        ];
+        return view('index',$data);
     }
 
 

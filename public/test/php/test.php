@@ -1,8 +1,7 @@
 <?php
-    $arr = [
-        'name'  => 'zhangsan',
-        'age'   => 11,
-        'condition' => (object)[]
-    ];
-
-    echo json_encode($arr);
+    if(1==='1')
+    {
+        echo '1';
+    }else{
+        echo '0';
+    }
