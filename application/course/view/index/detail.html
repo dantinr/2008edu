@@ -39,28 +39,31 @@
                 <p>讲师</p>
             </span>
         </span>-->
-            <!--未登录-->
-        	<span class="exambtn_lore">
-                 <a class="tkbtn tklog" href="login.html">登录</a>
-                 <a class="tkbtn tkreg" href="register.html">注册</a>
-            </span>
+
+            {if session('uid')}
             <!--登录后-->
-            <!--<div class="logined">
-                <a href="mycourse.html"  onMouseOver="logmine()" style="width:70px" class="link2 he ico" target="_blank">sherley</a>
+            <div class="logined">
+                <a href="mycourse.html"  onMouseOver="logmine()" style="width:70px" class="link2 he ico" target="_blank">{:session('name')}</a>
                 <span id="lne" style="display:none" onMouseOut="logclose()" onMouseOver="logmine()">
                     <span style="background:#fff;">
-                        <a href="mycourse.html" style="width:70px; display:block;" class="link2 he ico" target="_blank">sherley</a>
+                        <a href="mycourse.html" style="width:70px; display:block;" class="link2 he ico" target="_blank">{:session('name')}</a>
                     </span>
                     <div class="clearh"></div>
                     <ul class="logmine" >
-                        <li><a class="link1" href="#">我的课程</a></li>
+                        <li><a class="link1" href="/index.php?s=user/index/my">个人中心</a></li>
                         <li><a class="link1" href="#">我的题库</a></li>
                         <li><a class="link1" href="#">我的问答</a></li>
                         <li><a class="link1" href="#">退出</a></li>
                     </ul>
                 </span>
-            </div>-->
-
+            </div>
+            {else/}
+            <!--未登录-->
+                <span class="exambtn_lore">
+                     <a class="tkbtn tklog" href="login.html">登录</a>
+                     <a class="tkbtn tkreg" href="register.html">注册</a>
+                </span>
+            {/if}
         </span>
     </div>
 </div>

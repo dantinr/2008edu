@@ -180,7 +180,8 @@ class Index extends Controller
     /**
      * 个人中心
      */
-    public function center()
+    //public function center()
+    public function my()
     {
 
 
