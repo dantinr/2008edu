@@ -50,6 +50,16 @@ class Index extends Controller
         $uid = session('uid');                  //获取用户id
         $course_id = $request->post('id');      //获取课程id
 
+        //判断是否已收藏过
+        $record = CoursefavModel::where(['uid'=>$uid,'course_id'=>$course_id])->find();
+        if($record){
+            $response = [
+                'errno' => 500002,
+                'msg'   => '已收藏过，请勿重复收藏'
+            ];
+            return json($response);
+        }
+
         $data = [
             'course_id' => $course_id,
             'uid'       => $uid,
