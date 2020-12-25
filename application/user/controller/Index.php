@@ -99,7 +99,7 @@ class Index extends Controller
         $uid = session('uid');
         if($uid)        // 已登录
         {
-            $this->success('您已登录，正在跳转至个人中心','/index.php?s=user/index/center');
+            $this->success('您已登录，正在跳转至个人中心','/index.php?s=user/index/my');
         }else{  // 未登录
             return view();
         }

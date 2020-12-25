@@ -81,9 +81,15 @@
             <p class="courstime">课程评价：<img width="71" height="14" src="images/evaluate5.png">&nbsp;&nbsp;<span class="hidden-sm hidden-xs">5.0分（10人评价）</span></p>
             <!--<p><a class="state end">完结</a></p>-->
             <span class="coursebtn">
-                <a class="btnlink" href="coursecont1.html">加入学习</a>
+                <a class="btnlink" href="/index.php?s=course/index/addlearn&id={$detail.course_id}">
+                    {if $learn_status /}学习中{else/}加入学习{/if}
+                </a>
                 <a class="codol fx" href="javascript:void(0);" onClick="$('#bds').toggle();">分享课程</a>
-                <a class="codol sc" href="#" data-courseid="{$detail.course_id}">收藏课程</a>
+                {if $is_fav /}
+                     <a class="codol sc" href="#" data-fav="{$is_fav}" data-courseid="{$detail.course_id}">取消收藏</a>
+                {else/}
+                     <a class="codol sc" href="#" data-fav="{$is_fav}" data-courseid="{$detail.course_id}">收藏课程</a>
+                {/if}
             </span>
             <div style="clear:both;"></div>
             <div id="bds">

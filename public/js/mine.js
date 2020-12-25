@@ -121,29 +121,34 @@ $(function() {
 $(function() {
 
 	/*课程收藏*/
-	$(".codol.sc").toggle(function() {
+	$(".codol.sc").click(function(e) {
+		e.preventDefault()
 		var self = $(this)
-		var course_id = $(this).attr('data-courseid')		//获取course_id
+		var course_id = self.attr('data-courseid')		//获取course_id
+		var is_fav = self.attr('data-fav')		// 0未收藏 1已收藏
 		$.ajax({
-			url: '/index.php?s=course/index/favcourse&state=1',		//收藏
+			url: '/index.php?s=course/index/favcourse&state=' + Math.abs(is_fav-1),		//收藏
 			type: 'POST',
 			data: {id:course_id},
 			dataType: 'json'
 		}).done(function(d){
-			console.log(d)
-			self.css({
-				"background-images": "url(../images/ico_detail_item.png) no-repeat",
-				"background-position": "0px -1800px"
-			});
-			self.text("取消收藏");
+			if(is_fav==1){
+				self.css({
+					"background-images": "url(../images/ico_detail_item.png) no-repeat",
+					"background-position": "0px -1800px"
+				});
+				self.text("收藏课程");
+				self.attr('data-fav',Math.abs(is_fav-1))
+			}else{
+				self.css({
+					"background-images": "url(../images/ico_detail_item.png) no-repeat",
+					"background-position": "0px -1800px"
+				});
+				self.text("取消收藏");
+				self.attr('data-fav',Math.abs(is_fav-1))
+			}
+
 		})
-	},
-	function() {
-		$(this).css({
-			"background-images": "url(../images/ico_detail_item.png) no-repeat",
-			"background-position": "1px -5px"
-		});
-		$(this).text("收藏课程");
 	});
 
 	/*取消收藏*/
