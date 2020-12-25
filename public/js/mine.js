@@ -135,14 +135,14 @@ $(function() {
 			if(is_fav==1){
 				self.css({
 					"background-images": "url(../images/ico_detail_item.png) no-repeat",
-					"background-position": "0px -1800px"
+					"background-position": "0px -5px"
 				});
 				self.text("收藏课程");
 				self.attr('data-fav',Math.abs(is_fav-1))
 			}else{
 				self.css({
 					"background-images": "url(../images/ico_detail_item.png) no-repeat",
-					"background-position": "0px -1800px"
+					"background-position": "0px -5px"
 				});
 				self.text("取消收藏");
 				self.attr('data-fav',Math.abs(is_fav-1))
